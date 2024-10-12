@@ -7,11 +7,11 @@ const MedicalRecords = () => {
     ];
 
     return (
-        <div className="card">
-            <h3>Medical Records</h3>
-            <ul>
+        <div className="card-body">
+            <h5 className="card-title">Medical Records</h5>
+            <ul className="list-group">
                 {records.map((record, index) => (
-                    <li key={index}>
+                    <li key={index} className="list-group-item">
                         {record.recordType} on {record.date}: {record.result}
                     </li>
                 ))}

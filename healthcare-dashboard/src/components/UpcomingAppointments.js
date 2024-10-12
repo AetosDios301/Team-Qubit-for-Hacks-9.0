@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 const UpcomingAppointments = () => {
     const appointments = [
@@ -9,17 +7,17 @@ const UpcomingAppointments = () => {
     ];
 
     return (
-        <div className="card">
-            <h3>Upcoming Appointments <FontAwesomeIcon icon={faCalendarAlt} /></h3>
-            <ul>
+        <div className="card-body">
+            <h5 className="card-title">Upcoming Appointments</h5>
+            <ul className="list-group">
                 {appointments.map((appointment, index) => (
-                    <li key={index}>
-                        <FontAwesomeIcon icon={faCalendarAlt} /> {appointment.doctor} on {appointment.date} at {appointment.time}
+                    <li key={index} className="list-group-item">
+                        {appointment.doctor} on {appointment.date} at {appointment.time}
                     </li>
                 ))}
             </ul>
         </div>
     );
-};
+}
 
 export default UpcomingAppointments;

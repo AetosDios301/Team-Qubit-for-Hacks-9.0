@@ -36,8 +36,8 @@ const HealthStats = () => {
     };
 
     return (
-        <div className="card">
-            <h3>Health Stats</h3>
+        <div className="card-body">
+            <h5 className="card-title">Health Stats</h5>
             <Line data={data} options={options} />
         </div>
     );

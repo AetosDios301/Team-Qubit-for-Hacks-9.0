@@ -7,26 +7,25 @@ const Dashboard = () => {
     return (
         <div className="container mt-5">
             <h1 className="text-center">My Health Dashboard</h1>
-            
             <div className="row">
                 <div className="col-md-4">
-                    <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+                    <div className="card shadow-sm mb-4">
                         <UpcomingAppointments />
                     </div>
                 </div>
                 <div className="col-md-4">
-                    <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+                    <div className="card shadow-sm mb-4">
                         <MedicalRecords />
                     </div>
                 </div>
                 <div className="col-md-4">
-                    <div className="card shadow-sm p-3 mb-5 bg-white rounded">
+                    <div className="card shadow-sm mb-4">
                         <HealthStats />
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Dashboard;
