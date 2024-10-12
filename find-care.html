@@ -3,23 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Care | HealthBridge</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Find Care - HealthBridge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
-    <!-- Navbar (Same as Home Page) -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- Include the same navbar from above -->
-    </nav>
-
-    <!-- Main Content -->
     <div class="container mt-5">
-        <h1>Find Healthcare Providers</h1>
-        <p>Search for hospitals, doctors, or specialists by location or specialty. Book your appointment with ease.</p>
-        <!-- Add a search bar or filters to find doctors and hospitals -->
+        <h2 class="text-center mb-4">Find Healthcare Services</h2>
+
+        <!-- Search and Filters -->
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for doctors, clinics, hospitals..." id="searchInput">
+                    <button class="btn btn-primary" type="button" onclick="searchCare()">Search</button>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="filterSpecialist" value="specialist">
+                        <label class="form-check-label" for="filterSpecialist">Specialist</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="filterAvailability" value="availability">
+                        <label class="form-check-label" for="filterAvailability">Available Now</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="filterLocation" value="nearby">
+                        <label class="form-check-label" for="filterLocation">Nearby</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List of Healthcare Providers -->
+        <div class="row mt-4" id="careList">
+            <div class="col-md-8 offset-md-2">
+                <!-- Doctor Cards -->
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor1.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. John Doe</h5>
+                                <p class="card-text">Cardiologist - 4.8 ⭐ (120 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 10 AM - 5 PM</small></p>
+                                <p class="card-text">ETA: 15 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor2.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Jane Smith</h5>
+                                <p class="card-text">Dermatologist - 4.7 ⭐ (95 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 1 PM - 6 PM</small></p>
+                                <p class="card-text">ETA: 20 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor3.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Michael Brown</h5>
+                                <p class="card-text">Pediatrician - 4.9 ⭐ (150 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 9 AM - 4 PM</small></p>
+                                <p class="card-text">ETA: 10 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor4.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Sarah Wilson</h5>
+                                <p class="card-text">Orthopedic - 4.5 ⭐ (85 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 11 AM - 5 PM</small></p>
+                                <p class="card-text">ETA: 25 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor5.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Emma Davis</h5>
+                                <p class="card-text">Gynecologist - 4.6 ⭐ (110 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 10 AM - 3 PM</small></p>
+                                <p class="card-text">ETA: 30 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor6.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. William Johnson</h5>
+                                <p class="card-text">Neurologist - 4.4 ⭐ (75 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 12 PM - 6 PM</small></p>
+                                <p class="card-text">ETA: 18 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor7.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Olivia Martinez</h5>
+                                <p class="card-text">Endocrinologist - 4.3 ⭐ (60 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 9 AM - 1 PM</small></p>
+                                <p class="card-text">ETA: 22 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor8.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. James Taylor</h5>
+                                <p class="card-text">Gastroenterologist - 4.6 ⭐ (45 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 2 PM - 7 PM</small></p>
+                                <p class="card-text">ETA: 17 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor9.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Sophia Anderson</h5>
+                                <p class="card-text">Psychiatrist - 4.8 ⭐ (100 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 8 AM - 4 PM</small></p>
+                                <p class="card-text">ETA: 12 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor10.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Benjamin Wilson</h5>
+                                <p class="card-text">Ophthalmologist - 4.5 ⭐ (90 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 11 AM - 6 PM</small></p>
+                                <p class="card-text">ETA: 15 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="doctor11.jpg" class="img-fluid rounded-start" alt="Doctor">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Ava Thompson</h5>
+                                <p class="card-text">Hematologist - 4.7 ⭐ (85 reviews)</p>
+                                <p class="card-text"><small class="text-muted">Available: 9 AM - 2 PM</small></p>
+                                <p class="card-text">ETA: 10 minutes</p>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary me-2" onclick="openMap()">View on Map</button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Book Appointment
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('offline')">Offline Visit</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="bookAppointment('online')">Online Consultation</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional cards can be added dynamically with JavaScript -->
+            </div>
+        </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Modal for Google Maps -->
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">Location of Dr. John Doe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="gmapIframe" src="" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="find-care.js"></script>
 </body>
 </html>
