@@ -31,12 +31,13 @@ function openMap() {
     mapModal.show();
 }
 
-function bookAppointment(type) {
+function bookAppointment(type, doctorName) {
     if (type === 'offline') {
-        // Redirect to offline booking form
-        window.location.href = 'offline-booking.html';  
+        // Redirect to offline booking form with doctor's name
+        window.location.href = `offline-booking.html?doctorName=${encodeURIComponent(doctorName)}`;  
     } else if (type === 'online') {
-        // Redirect to online consultation scheduling page
-        window.location.href = 'online-booking.html';  
+        // Redirect to online consultation scheduling page with doctor's name
+        window.location.href = `online-booking.html?doctorName=${encodeURIComponent(doctorName)}`;  
     }
 }
+

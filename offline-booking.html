@@ -12,7 +12,7 @@
         <form id="offlineBookingForm">
             <div class="mb-3">
                 <label for="doctorName" class="form-label">Doctor's Name</label>
-                <input type="text" class="form-control" id="doctorName" required>
+                <input type="text" class="form-control" id="doctorName" required readonly>
             </div>
             <div class="mb-3">
                 <label for="appointmentDate" class="form-label">Appointment Date</label>
@@ -31,6 +31,15 @@
     </div>
 
     <script>
+        // Get query parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const doctorName = urlParams.get('doctorName'); // Get doctor's name from query parameter
+
+        // Populate the doctor's name field if available
+        if (doctorName) {
+            document.getElementById('doctorName').value = doctorName;
+        }
+
         document.getElementById('offlineBookingForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
             alert('Offline appointment booked successfully!');
