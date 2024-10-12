@@ -6,47 +6,53 @@
     <title>Healthcare Platform Navbar</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS to remove underline from links -->
+    <style>
+        .nav-link {
+            text-decoration: none; /* Remove underline */
+        }
+        .nav-link:hover {
+            text-decoration: underline; /* Optionally add underline on hover */
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">HealthBridge</a>
+            <a class="navbar-brand" href="index.html">HealthBridge</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Find Care</a>
+                        <a class="nav-link" href="find-care.html">Find Care</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Blogs</a>
+                        <a class="nav-link" href="dashboard.html">My Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Dashboard</a>
+                        <a class="nav-link" href="telemedicine.html">Telemedicine</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Telemedicine</a>
+                        <a class="nav-link" href="pricing.html">Pricing & Plans</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing & Plans</a>
+                        <a class="nav-link" href="help.html">Help</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Help</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white" href="#">Login / Sign Up</a>
+                        <a class="nav-link btn btn-primary text-white" href="login.html">Login / Sign Up</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Bootstrap JS and Popper.js -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
