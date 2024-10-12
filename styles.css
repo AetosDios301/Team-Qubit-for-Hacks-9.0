@@ -1,43 +1,77 @@
+/* Custom styles for a clean, modern look */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    background: linear-gradient(135deg, #e2f0d6 30%, #c8e4f4 90%); /* Soft gradient background */
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the footer is at the bottom */
 }
 
 .navbar {
-    transition: all 0.3s ease;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
+.navbar-brand img {
+    border-radius: 50%;
+}
+
+.features-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%; /* Full width for responsiveness */
+    transition: transform 0.3s;
+}
+
+.feature:hover {
+    transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.feature-image {
+    width: 300px; /* Set image width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 20px; /* Space between image and text */
+}
+
+.feature-content {
+    max-width: 600px; /* Limit content width for readability */
+}
+
+.footer {
+    background-color: #ffffff;
+    padding: 30px 0;
+    margin-top: auto; /* Push footer to the bottom */
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer h5 {
+    margin-bottom: 20px;
     font-weight: bold;
-    color: #0056b3;
 }
 
-.nav-link {
-    color: #495057;
-    font-weight: 500;
-    transition: color 0.3s ease;
+.footer a {
+    color: #007bff;
+    text-decoration: none;
 }
 
-.nav-link:hover {
-    color: #0056b3;
+.footer a:hover {
+    text-decoration: underline;
 }
 
-.btn-primary {
-    background-color: #0056b3;
-    border-color: #0056b3;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #004494;
-    border-color: #004494;
-}
-
-@media (max-width: 991.98px) {
-    .navbar-nav {
-        padding-top: 1rem;
-    }
-    .nav-item {
-        padding: 0.5rem 0;
-    }
+.copyright {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    border-top: 1px solid #e0e0e0;
 }
